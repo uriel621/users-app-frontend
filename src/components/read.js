@@ -1,43 +1,27 @@
 import React, { Component } from 'react';
+import Axios from 'axios';
+import { connect } from 'react-redux';
+import { fetchUsers } from '../actions/postActions';
+
+import ReadUserList from './read/read_user_list';
 
 class Read extends Component {
-
-    constructor(props) {
-        super(props);
-        this.state = {
-            users:null
-        };
-
-        fetch('https://shielded-mesa-72796.herokuapp.com/users')
-            .then((response) => {
-                return response.json();
-            })
-            .then((json) => {
-                this.setState({ users:json.users })
-            });
-
+    componentWillMount(){
+        this.props.fetchUsers();
+        console.log(this.props);
     }
 
     render() {
-        if(!this.state.users){
-            return (
-                <div></div>
-            )
-        }
         return (
             <div className="container">
-                {  
-                    this.state.users.map((user, index) => {
-                        return (
-                            <div key={ index }>
-                                { user.name }
-                            </div>
-                        )
-                    })
-                }
+                <ReadUserList users={ this.props.posts.items } />
             </div>
         );
     }
 }
 
-export default Read;
+const mapStateToPorops = state => ({ 
+    posts:state.users
+})
+
+export default connect(mapStateToPorops, { fetchUsers })(Read);

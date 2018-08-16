@@ -13,7 +13,7 @@ class Routes extends Component {
     return (
         <Switch>
             <Route path='/create' component={ Create }/>
-            <Route path='/' component={ Read }/>
+            <Route exact path='/' component={ Read }/>
             <Route path='/update' component={ Update }/>
             <Route path='/delete' component={ Delete }/>
         </Switch>
