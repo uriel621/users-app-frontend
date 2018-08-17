@@ -1,4 +1,4 @@
-import { FETCH_USERS, NEW_POSTS } from '../actions/types';
+import { FETCH_USERS, NEW_USERS, DELETE_USERS } from '../actions/types';
 
 const initialState = {
     items: [],
@@ -12,6 +12,21 @@ export default function(state = initialState, action){
             "items": action.payload
         };
     }
+    
+    else if(action.type === NEW_USERS){
+        return {
+            ...state,
+            "items": action.payload
+        };
+    }
+
+    else if(action.type === DELETE_USERS){
+        return {
+            ...state,
+            "items": action.payload
+        };
+    }
+
     else {
         return state;
     }
