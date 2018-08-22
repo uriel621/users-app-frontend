@@ -1,8 +1,8 @@
-import { FETCH_USERS, NEW_USERS, DELETE_USERS } from '../actions/types';
+import { FETCH_USERS, FETCH_USER, NEW_USERS, DELETE_USERS } from '../actions/types';
 
 const initialState = {
     items: [],
-    item: {}
+    user: {}
 }
 
 export default function(state = initialState, action){
@@ -10,6 +10,13 @@ export default function(state = initialState, action){
         return {
             ...state,
             "items": action.payload
+        };
+    }
+
+    if(action.type === FETCH_USER){
+        return {
+            ...state,
+            "user": action.payload
         };
     }
     

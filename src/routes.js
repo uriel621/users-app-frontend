@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/partials/navbar';
+import Form from './components/partials/form';
 import Create from './components/create';
 import Read from './components/read';
 import Update from './components/update';
@@ -15,9 +16,9 @@ class Routes extends Component {
       <div>
         <Navbar />
         <Switch>
-          <Route path='/create' component={ Create }/>
+          <Route path='/create' component={ Form }/>
           <Route exact path='/' component={ Read }/>
-          <Route path='/update' component={ Update }/>
+          <Route path='/update/:username' component={ Form }/>
           <Route path='/delete' component={ Delete }/>
         </Switch>
       </div>

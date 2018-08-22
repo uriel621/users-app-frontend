@@ -1,4 +1,4 @@
-import { FETCH_USERS, NEW_USERS, DELETE_USERS } from './types';
+import { FETCH_USERS, FETCH_USER, NEW_USERS, DELETE_USERS } from './types';
 import Axios from 'axios';
 
 export const fetchUsers = () => dispatch => {
@@ -7,6 +7,20 @@ export const fetchUsers = () => dispatch => {
             dispatch({
                 "type":FETCH_USERS,
                 "payload":response.data.users
+            })
+        })           
+        .catch((error) => {
+            console.log(error);
+        })
+}
+
+export const fetchUser = (username) => dispatch => {
+    Axios.get(`http://localhost:4000/edit/${ username }`)
+        .then( (response) => {
+            // console.log(response.data)
+            dispatch({
+                "type":FETCH_USER,
+                "payload":response.data
             })
         })           
         .catch((error) => {

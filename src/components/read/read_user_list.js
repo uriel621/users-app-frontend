@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from "react-router-dom";
 
 const user_list = (props) => {
     return (
@@ -41,7 +42,7 @@ const user_list = (props) => {
                                                 </div>
                                                 
                                                 <ul className="list-inline">
-                                                    <button style={{ "display":"inline-block", "width": "25%" }} className="list-inline-item btn btn-primary">Edit</button>
+                                                    <Link to={ `update/${ user.username }` }><button style={{ "display":"inline-block", "width": "25%" }} className="list-inline-item btn btn-primary">Edit</button></Link>
                                                     <button style={{ "display":"inline-block", "width": "25%" }} onClick={ () => props.remove(user) } className="list-inline-item btn btn-warning">Remove</button>
                                                 </ul>
                                             </div>

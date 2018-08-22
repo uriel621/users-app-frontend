@@ -34,8 +34,8 @@ class Read extends Component {
     }
 }
 
-const mapStateToPorops = state => ({ 
+const mapStateToProps = state => ({ 
     posts:state.users
 })
 
-export default connect(mapStateToPorops, { fetchUsers, deleteUser })(Read);
+export default connect(mapStateToProps, { fetchUsers, deleteUser })(Read);
