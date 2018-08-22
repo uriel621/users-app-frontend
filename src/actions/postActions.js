@@ -1,4 +1,4 @@
-import { FETCH_USERS, FETCH_USER, NEW_USERS, DELETE_USERS } from './types';
+import { FETCH_USERS, FETCH_USER, UPDATE_USER, NEW_USERS, DELETE_USERS } from './types';
 import Axios from 'axios';
 
 export const fetchUsers = () => dispatch => {
@@ -26,6 +26,21 @@ export const fetchUser = (username) => dispatch => {
         .catch((error) => {
             console.log(error);
         })
+}
+
+export const updateUser = (userData) => dispatch => {
+    console.log(userData)
+    Axios.post('http://localhost:4000/update', userData)
+        .then(function (response) {
+            console.log('POST', response.data)
+            dispatch({
+                "type":UPDATE_USER,
+                "payload":response.data.users
+            })
+        })
+        .catch(function (error) {
+            console.log(error);
+        });
 }
 
 export const createUser = (userData) => dispatch => {
