@@ -1,8 +1,8 @@
-import { FETCH_USERS, FETCH_USER, UPDATE_USER, NEW_USERS, DELETE_USERS } from './types';
+import { FETCH_USERS, FETCH_USER, UPDATE_USER, NEW_USERS, DELETE_USERS, CHANGE_AUTH } from './types';
 import Axios from 'axios';
 
 export const fetchUsers = () => dispatch => {
-    Axios.get('http://localhost:4000/users')
+    Axios.get('https://shielded-mesa-72796.herokuapp.com/users')
         .then( (response) => {
             dispatch({
                 "type":FETCH_USERS,
@@ -15,7 +15,7 @@ export const fetchUsers = () => dispatch => {
 }
 
 export const fetchUser = (username) => dispatch => {
-    Axios.get(`http://localhost:4000/edit/${ username }`)
+    Axios.get(`https://shielded-mesa-72796.herokuapp.com/edit/${ username }`)
         .then( (response) => {
             // console.log(response.data)
             dispatch({
@@ -30,7 +30,7 @@ export const fetchUser = (username) => dispatch => {
 
 export const updateUser = (userData) => dispatch => {
     console.log(userData)
-    Axios.post('http://localhost:4000/update', userData)
+    Axios.post('https://shielded-mesa-72796.herokuapp.com/update', userData)
         .then(function (response) {
             console.log('POST', response.data)
             dispatch({
@@ -44,7 +44,7 @@ export const updateUser = (userData) => dispatch => {
 }
 
 export const createUser = (userData) => dispatch => {
-    Axios.post('http://localhost:4000/create', userData)
+    Axios.post('https://shielded-mesa-72796.herokuapp.com/create', userData)
         .then(function (response) {
             dispatch({
                 "type":NEW_USERS,
@@ -57,7 +57,7 @@ export const createUser = (userData) => dispatch => {
 }
 
 export const deleteUser = (userData) => dispatch => {
-    Axios.post('http://localhost:4000/delete', userData)
+    Axios.post('https://shielded-mesa-72796.herokuapp.com/delete', userData)
         .then(function (response) {
             dispatch({
                 "type":DELETE_USERS,
@@ -67,4 +67,15 @@ export const deleteUser = (userData) => dispatch => {
         .catch(function (error) {
             console.log(error);
         });
+}
+
+export const change_auth = (logged_in) => dispatch => {
+    // return {
+    //     "type":CHANGE_AUTH,
+    //     "payload":logged_in   
+    // }
+    dispatch({
+        "type":CHANGE_AUTH,
+        "payload":logged_in
+    })
 }

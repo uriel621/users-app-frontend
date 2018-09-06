@@ -1,8 +1,8 @@
 import { FETCH_USERS, FETCH_USER, UPDATE_USER, NEW_USERS, DELETE_USERS } from '../actions/types';
 
 const initialState = {
-    items: [],
-    user: {}
+    "items": [],
+    "user": {}
 }
 
 export default function(state = initialState, action){

@@ -8,7 +8,7 @@ import { createUser, fetchUser, updateUser } from '../../actions/postActions';
 import Axios from 'axios';
 
 const Template = (props) => {
-    console.log('Template', props)
+    // console.log('Template', props)
     return(
         <form className="form-horizontal" onSubmit={ (e) => props.onSubmitEvent(e) }>
             <div className="form-group" hidden>
@@ -98,12 +98,21 @@ class Form extends Component {
     document.querySelector("#root").style.background = 'white';
   }
 
+    navigate_away(){
+        if(!this.props.auth) {
+            console.log('MOVE!!!')
+            this.props.history.push('/');
+        }
+    }
+
     componentWillMount(){
+        this.navigate_away()
+
         if(!this.props.match.params.username){
-            console.log('create');
+            // console.log('create');
         }
         else {
-            Axios.get(`http://localhost:4000/edit/${ this.props.match.params.username }`)
+            Axios.get(`https://shielded-mesa-72796.herokuapp.com/edit/${ this.props.match.params.username }`)
                 .then( (response) => {
                     // console.log("...Loading", response.data);
                     // for(let key in response.data) {
@@ -113,8 +122,6 @@ class Form extends Component {
                     //     // this.setState({ key:"l" })
                     //     // console.log(key)
                     // }
-                    console.log('LOLOL',response.data)
-                    console.log('LOLOL',response.data.id)
                     this.setState({ "id":response.data.id })
                     this.setState({ "birthday":response.data.birthday })
                     this.setState({ "email":response.data.email })
@@ -157,14 +164,12 @@ class Form extends Component {
       }
 
   render() {
-    console.log('R_STATE', this.state);
     if(this.props.location.pathname.includes('create')){
         return(
             <Template type={ 'date' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
         )
     }
     else if(this.props.location.pathname.includes('update') && this.state){
-        console.log(621)
         return (
             <Template type={ 'text' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
         )
@@ -173,7 +178,8 @@ class Form extends Component {
 }
 
 const mapStateToProps = state => ({ 
-    user:state.users.user
+    "user":state.users.user,
+    "auth":state.auth
 })
 
 export default connect(mapStateToProps, { createUser, fetchUser, updateUser })(Form)

@@ -12,6 +12,16 @@ class Read extends Component {
         this.props.fetchUsers();
     }
 
+    notice(){
+        if(!this.props.auth){
+            return (
+                <div style={{ "textAlign":"center" }}>
+                    To CREATE or UPDATE users make sure to sign in
+                </div>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="container">
@@ -20,6 +30,8 @@ class Read extends Component {
                         <button className="btn btn-info" style={{ "width":"50%" }}>Add Users</button>
                     </Link>
                 </div>
+
+                { this.notice() }
                 <br />
 
                 <section id="team" className="pb-5">
@@ -35,7 +47,8 @@ class Read extends Component {
 }
 
 const mapStateToProps = state => ({ 
-    posts:state.users
+    posts:state.users,
+    auth:state.auth
 })
 
 export default connect(mapStateToProps, { fetchUsers, deleteUser })(Read);

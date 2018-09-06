@@ -1,8 +1,29 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
+import { connect } from 'react-redux';
+import { change_auth } from '../../actions/postActions';
 
 class Navbar extends Component {
-  render() {
+    
+    render_header(){
+        if(this.props.auth){
+            return (
+                <li className="nav-item">
+                    <Link onClick={ () => this.props.change_auth(false) } className="nav-link" to="/">Sign Out</Link>
+                </li>
+            )
+        }
+        else {
+            return (
+                <li className="nav-item">
+                    <Link onClick={ () => this.props.change_auth(true) } className="nav-link" to="/">Sign in</Link>
+                </li>
+            )
+        }
+    }
+
+    render() {
+
     return (
         <nav className="navbar navbar-expand-md navbar-dark bg-dark mb-4">
             <Link className="navbar-brand" to="/">Users</Link>
@@ -17,6 +38,7 @@ class Navbar extends Component {
                     <li className="nav-item">
                         <Link className="nav-link" to="/create">About</Link>
                     </li>
+                    { this.render_header() }
                 </ul>
             </div>
         </nav>
@@ -24,4 +46,8 @@ class Navbar extends Component {
   }
 }
 
-export default Navbar;
+const mapStateToProps = state => ({ 
+    auth:state.auth
+})
+
+export default connect(mapStateToProps, { change_auth })(Navbar);
