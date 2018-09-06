@@ -5,6 +5,7 @@ import { Link, Redirect  } from "react-router-dom";
 import { connect } from 'react-redux';
 // import { createUser } from '../actions/postActions';
 import { createUser, fetchUser, updateUser } from '../../actions/postActions';
+import requireAuth from '../../components/requireAuth';
 import Axios from 'axios';
 
 const Template = (props) => {
@@ -98,16 +99,11 @@ class Form extends Component {
     document.querySelector("#root").style.background = 'white';
   }
 
-    navigate_away(){
-        if(!this.props.auth) {
-            console.log('MOVE!!!')
-            this.props.history.push('/');
-        }
-    }
+
+
+
 
     componentWillMount(){
-        this.navigate_away()
-
         if(!this.props.match.params.username){
             // console.log('create');
         }
@@ -182,4 +178,4 @@ const mapStateToProps = state => ({
     "auth":state.auth
 })
 
-export default connect(mapStateToProps, { createUser, fetchUser, updateUser })(Form)
+export default connect(mapStateToProps, { createUser, fetchUser, updateUser })(requireAuth(Form))
