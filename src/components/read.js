@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-// import Axios from 'axios';
 import { connect } from 'react-redux';
 import { fetchUsers, deleteUser } from '../actions/postActions';
 
@@ -47,8 +46,8 @@ class Read extends Component {
 }
 
 const mapStateToProps = state => ({ 
-    posts:state.users,
-    auth:state.auth
+    "posts":state.users,
+    "auth":state.auth
 })
 
 export default connect(mapStateToProps, { fetchUsers, deleteUser })(Read);

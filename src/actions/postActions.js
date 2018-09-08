@@ -17,7 +17,6 @@ export const fetchUsers = () => dispatch => {
 export const fetchUser = (username) => dispatch => {
     Axios.get(`https://shielded-mesa-72796.herokuapp.com/edit/${ username }`)
         .then( (response) => {
-            // console.log(response.data)
             dispatch({
                 "type":FETCH_USER,
                 "payload":response.data
@@ -69,7 +68,7 @@ export const deleteUser = (userData) => dispatch => {
         });
 }
 
-export const change_auth = (logged_in) => dispatch => {
+export const change_auth = logged_in => dispatch => {
     // return {
     //     "type":CHANGE_AUTH,
     //     "payload":logged_in   

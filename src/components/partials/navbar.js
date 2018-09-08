@@ -36,7 +36,7 @@ class Navbar extends Component {
                         <Link className="nav-link" to="/">Home <span className="sr-only">(current)</span></Link>
                     </li>
                     <li className="nav-item">
-                        <Link className="nav-link" to="/create">About</Link>
+                        <Link className="nav-link" to="/about">About</Link>
                     </li>
                     { this.render_header() }
                 </ul>

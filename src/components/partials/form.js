@@ -1,9 +1,5 @@
-// https://shielded-mesa-72796.herokuapp.com/users.json
-
 import React, { Component } from 'react';
-import { Link, Redirect  } from "react-router-dom";
 import { connect } from 'react-redux';
-// import { createUser } from '../actions/postActions';
 import { createUser, fetchUser, updateUser } from '../../actions/postActions';
 import requireAuth from '../../components/requireAuth';
 import Axios from 'axios';
@@ -71,53 +67,38 @@ const Template = (props) => {
 }
 
 class Form extends Component {
-  constructor(props){
-    super(props);
-    this.state = {
-        "id":"",
-        "birthday":"",
-        "email":"",
-        "favoriteColor":"",
-        "image":"",
-        "name":"",
-        "username":""
+    constructor(props){
+        super(props);
+        this.state = {
+            "id":"",
+            "birthday":"",
+            "email":"",
+            "favoriteColor":"",
+            "image":"",
+            "name":"",
+            "username":""
+        }
+        // this.onChangeEvent = this.onChangeEvent.bind(this);
+        // this.onSubmitEvent = this.onSubmitEvent.bind(this);
+        // this.stateApp_to_componentApp = this.stateApp_to_componentApp.bind(this);
+        // console.log('FORM', this.props)
+        // console.log('FORM', this.props.location.pathname);
+        // this.form = {
+        //     "remote":false,
+        //     "birthday":"",
+        //     "email":"",
+        //     "favoriteColor":"",
+        //     "image":"",
+        //     "name":"",
+        //     "username":""
+        // };
+        document.querySelector("#root").style.background = 'white';
     }
-    // this.onChangeEvent = this.onChangeEvent.bind(this);
-    // this.onSubmitEvent = this.onSubmitEvent.bind(this);
-    // this.stateApp_to_componentApp = this.stateApp_to_componentApp.bind(this);
-    // console.log('FORM', this.props)
-    // console.log('FORM', this.props.location.pathname);
-    // this.form = {
-    //     "remote":false,
-    //     "birthday":"",
-    //     "email":"",
-    //     "favoriteColor":"",
-    //     "image":"",
-    //     "name":"",
-    //     "username":""
-    // };
-    document.querySelector("#root").style.background = 'white';
-  }
-
-
-
-
 
     componentWillMount(){
-        if(!this.props.match.params.username){
-            // console.log('create');
-        }
-        else {
+        if(this.props.match.params.username){
             Axios.get(`https://shielded-mesa-72796.herokuapp.com/edit/${ this.props.match.params.username }`)
                 .then( (response) => {
-                    // console.log("...Loading", response.data);
-                    // for(let key in response.data) {
-                    //     // console.log('state', this.state)
-                    //     console.log('lol', key)
-                    //     console.log('kik', this.state[key]);
-                    //     // this.setState({ key:"l" })
-                    //     // console.log(key)
-                    // }
                     this.setState({ "id":response.data.id })
                     this.setState({ "birthday":response.data.birthday })
                     this.setState({ "email":response.data.email })
@@ -131,12 +112,10 @@ class Form extends Component {
                 })
         }
     }
-
   
     onChangeEvent(e){
         let field = e.target.name;
-        console.log(e.target)
-        this.setState({ [field]: e.target.value })
+        this.setState({ [field]: e.target.value });
       }
     
     onSubmitEvent(e){
@@ -159,18 +138,19 @@ class Form extends Component {
         this.props.history.push('/')
       }
 
-  render() {
-    if(this.props.location.pathname.includes('create')){
-        return(
-            <Template type={ 'date' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
-        )
+    render() {
+        console.log(this.props)
+        if(this.props.location.pathname.includes('create')){
+            return(
+                <Template type={ 'date' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
+            )
+        }
+        else if(this.props.location.pathname.includes('update') && this.state){
+            return (
+                <Template type={ 'text' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
+            )
+        }
     }
-    else if(this.props.location.pathname.includes('update') && this.state){
-        return (
-            <Template type={ 'text' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
-        )
-    }
-  }
 }
 
 const mapStateToProps = state => ({ 
