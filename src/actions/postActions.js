@@ -1,4 +1,4 @@
-import { FETCH_USERS, FETCH_USER, UPDATE_USER, NEW_USERS, DELETE_USERS, CHANGE_AUTH } from './types';
+import { FETCH_USERS, FETCH_USER, UPDATE_USER, NEW_USERS, DELETE_USERS, CHANGE_AUTH, CHECK_AUTH } from './types';
 import Axios from 'axios';
 
 export const fetchUsers = () => dispatch => {
@@ -73,8 +73,29 @@ export const change_auth = logged_in => dispatch => {
     //     "type":CHANGE_AUTH,
     //     "payload":logged_in   
     // }
-    dispatch({
-        "type":CHANGE_AUTH,
-        "payload":logged_in
-    })
+    const post = { "logged_in":logged_in };
+    Axios.post('http://localhost:4000/auth', post)
+        .then(function (response) {
+            console.log('AUTH', response.data);
+            dispatch({
+                "type":CHANGE_AUTH,
+                "payload":logged_in
+            })
+        })
+    .catch(function (error) {
+        console.log(error);
+    });
+}
+
+export const checkAuth = () => dispatch => {
+    Axios.get('http://localhost:4000/auth')
+        .then(response => {
+            dispatch({
+                "type":CHECK_AUTH,
+                "payload":response.data
+            })
+        })           
+        .catch(error => {
+            console.log(error);
+        })
 }

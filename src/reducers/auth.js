@@ -1,9 +1,11 @@
-import {  CHANGE_AUTH } from '../actions/types';
+import {  CHANGE_AUTH, CHECK_AUTH } from '../actions/types';
 
 export default function(state = false, action){
     if(action.type === CHANGE_AUTH){
-        console.log(action.type, action.payload)
+        return action.payload;
+    }
 
+    else if(action.type === CHECK_AUTH){
         return action.payload;
     }
 

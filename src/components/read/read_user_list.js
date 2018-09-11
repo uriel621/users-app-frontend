@@ -13,7 +13,7 @@ const user_list = (props) => {
                                     <div className="frontside">
                                         <div className="card">
                                             <div className="card-body text-center">
-                                                <p><img height="128" width="128" className=" img-fluid" src={ user.image } alt="card image" /></p>
+                                                <p><img height="128" width="128" className="img-fluid" src={ user.image } alt="card" /></p>
                                                 <h4 className="card-title">{ user.name }</h4>
                                                 <p className="card-text"><strong>Date joined:</strong> { user.joinDate }</p>
                                                 <span style={{ "color":"white" }} className="btn btn-primary btn-sm"><i className="fa fa-user"></i></span>
@@ -42,8 +42,10 @@ const user_list = (props) => {
                                                 </div>
                                                 
                                                 <ul className="list-inline">
-                                                    <Link to={ `update/${ user.username }` }><button style={{ "display":"inline-block", "width": "25%" }} className="list-inline-item btn btn-primary">Edit</button></Link>
-                                                    <button style={{ "display":"inline-block", "width": "25%" }} onClick={ () => props.remove(user) } className="list-inline-item btn btn-warning">Remove</button>
+                                                    <Link to={ `update/${ user.username }` }>
+                                                        <button style={{ "display":"inline-block", "width": "" }} className="list-inline-item btn btn-primary">Edit</button>
+                                                    </Link>
+                                                    <button style={{ "display":"inline-block", "width": "" }} onClick={ () => props.remove(user) } className="list-inline-item btn btn-warning">Remove</button>
                                                 </ul>
                                             </div>
                                         </div>

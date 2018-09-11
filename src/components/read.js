@@ -1,13 +1,14 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
 import { connect } from 'react-redux';
-import { fetchUsers, deleteUser } from '../actions/postActions';
+import { fetchUsers, deleteUser, checkAuth } from '../actions/postActions';
 
 import ReadUserList from './read/read_user_list';
 
 class Read extends Component {
     componentWillMount(){
         document.querySelector("#root").style.background = '#eee';
+        this.props.checkAuth();
         this.props.fetchUsers();
     }
 
@@ -50,4 +51,4 @@ const mapStateToProps = state => ({
     "auth":state.auth
 })
 
-export default connect(mapStateToProps, { fetchUsers, deleteUser })(Read);
+export default connect(mapStateToProps, { fetchUsers, deleteUser, checkAuth })(Read);

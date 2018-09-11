@@ -5,9 +5,9 @@ import { Route, Switch } from 'react-router-dom';
 
 import Navbar from './components/partials/navbar';
 import Form from './components/partials/form';
-import Create from './components/create';
+// import Create from './components/create';
 import Read from './components/read';
-import Update from './components/update';
+// import Update from './components/update';
 import Delete from './components/delete';
 import About from './components/about';
 

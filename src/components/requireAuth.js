@@ -13,8 +13,8 @@ export default ChildComponent => {
     
         navigate_away(){
             if(!this.props.auth) {
-                console.log('MOVE!!!')
                 this.props.history.push('/');
+                alert('You Need To Sign In');
             }
         }
 

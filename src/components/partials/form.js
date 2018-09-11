@@ -116,7 +116,7 @@ class Form extends Component {
     onChangeEvent(e){
         let field = e.target.name;
         this.setState({ [field]: e.target.value });
-      }
+    }
     
     onSubmitEvent(e){
         e.preventDefault();
@@ -135,11 +135,10 @@ class Form extends Component {
         else {
             this.props.updateUser(post);
         }
-        this.props.history.push('/')
-      }
+        this.props.history.push('/');
+    }
 
     render() {
-        console.log(this.props)
         if(this.props.location.pathname.includes('create')){
             return(
                 <Template type={ 'date' } onChangeEvent={ (e) => this.onChangeEvent(e) } onSubmitEvent={ (e) => this.onSubmitEvent(e)  } user={ this.state } />
