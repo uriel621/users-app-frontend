@@ -10,6 +10,7 @@ import Read from './components/read';
 // import Update from './components/update';
 import Delete from './components/delete';
 import About from './components/about';
+import Counter from './components/Counter';
 
 class Routes extends Component {
   render() {
@@ -22,6 +23,7 @@ class Routes extends Component {
           <Route path='/update/:username' component={ Form }/>
           <Route path='/delete' component={ Delete }/>
           <Route path='/about' component={ About }/>
+          <Route path='/counter' component={ Counter }/>
         </Switch>
       </div>
     );
